@@ -10,6 +10,9 @@ public class HamburgerShop {
 
 	public static void main(String[] args) {
 
+		// 標準入力の用意
+		Scanner scan = new Scanner(System.in);
+
 		// 売上No
 		int salesNo = 0;
 		// 売上詳細No
@@ -19,22 +22,16 @@ public class HamburgerShop {
 		// 商品購入数
 		int itemNumber = 0;
 
-		// 標準入力の用意
-		Scanner scan = new Scanner(System.in);
+		// お客氏名の入力
+		do {
+			System.out.println("お客様のお名前を教えて下さい。");
+			name = scan.nextLine();
+		} while (name.isEmpty());
 
 		// 注文ヘッダの登録
-		System.out.println("お客様のお名前を教えて下さい。");
-		name = scan.nextLine();
-		if (name.isEmpty()) {
-			System.out.println("不正な値が入力されました。");
-			System.exit(0);
-		}
-		
-
 		SalesHeadDao hDao = new SalesHeadDao();
-		salesNo = hDao.getNextSalesNo();
-		
 		SalesHeadDto hDto = new SalesHeadDto();
+		salesNo = hDao.getNextSalesNo();
 		hDto.setSalesNo(salesNo);
 		hDto.setCustomerName(name);
 		hDto.setCreatedAt(new Timestamp(System.currentTimeMillis()));
@@ -44,12 +41,9 @@ public class HamburgerShop {
 		System.out.println(name + " 様、ご注文をどうぞ。");
 		SalesLineDao lDao = new SalesLineDao();
 		for (String item : ITEMS) {
-			itemNumber = 0;
-
 			System.out.println(item + " はいくつ注文しますか？");
-			itemNumber = Integer.parseInt(scan.nextLine());
 
-			// ラインの登録
+			itemNumber = Integer.parseInt(scan.nextLine());
 			if (itemNumber > 0) {
 				SalesLineDto lDto = new SalesLineDto();
 				lDto.setSalesNo(salesNo);
@@ -61,7 +55,5 @@ public class HamburgerShop {
 		}
 
 		System.out.println(name + " 様、ご注文ありがとうございました。");
-
 	}
-
 }

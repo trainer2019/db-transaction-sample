@@ -14,6 +14,11 @@ public class SalesHeadDao {
 	private static final String USER_ID = "imuser";
 	private static final String USER_PASS = "impass";
 
+	/**
+	 * 売上ヘッダデータを保存
+	 *
+	 * @param SalesHeadDto head
+	 */
 	public void insertHead(SalesHeadDto head) {
 
 		try {
@@ -62,6 +67,11 @@ public class SalesHeadDao {
 		}
 	}
 
+	/**
+	 * 次の売上Noを発行する
+	 *
+	 * @return 次の売上No
+	 */
 	public int getNextSalesNo() {
 
 		try {
@@ -88,8 +98,10 @@ public class SalesHeadDao {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				nextNo = rs.getInt("max_no") + 1;
+				nextNo = rs.getInt("max_no");
+				nextNo += 1;
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

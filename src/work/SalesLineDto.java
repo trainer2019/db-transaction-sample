@@ -3,6 +3,7 @@ package work;
 import java.sql.Timestamp;
 
 public class SalesLineDto {
+
 	// 売上No
 	private int salesNo;
 	// 売上詳細No
@@ -53,5 +54,4 @@ public class SalesLineDto {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-
 }

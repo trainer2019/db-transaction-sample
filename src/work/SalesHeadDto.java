@@ -3,6 +3,7 @@ package work;
 import java.sql.Timestamp;
 
 public class SalesHeadDto {
+
 	// 売上No
 	private int salesNo;
 	// お客名
@@ -33,5 +34,4 @@ public class SalesHeadDto {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-
 }
